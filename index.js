@@ -1,6 +1,6 @@
-import { writable } from 'svelte/store';
+const store = require('svelte/store');
 
-const query = writable({}) 
+const query = store.writable({}) 
 query.navigatable = []
 
 // TODO: figure out a way to support SSR
@@ -52,4 +52,4 @@ if (typeof window !== 'undefined') {
   })
 }
 
-export default query
+module.exports = query
