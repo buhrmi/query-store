@@ -12,6 +12,8 @@ import query from 'query-store'
 <input bind:value={$query.someparam}>
 ```
 
+![demo](https://i.imgur.com/zhm9IkY.gif)
+
 And that's all there is to it.
 
 ### Todo
