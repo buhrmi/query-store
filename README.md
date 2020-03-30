@@ -39,8 +39,9 @@ To create a history entry on each query change (using pushState instead of repla
 ```html
 <script>
 import query from 'query-store'
-query.navigatable.push('tab')
+query.navigatable.push('seed')
 </script>
 
-<a class="tab" on:click={() => $query.tab = 'home'}>
+Current seed is {$query.seed}
+<button on:click={() => $query.seed = Math.random()}>Generate new seed</button>
 ```
