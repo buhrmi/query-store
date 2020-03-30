@@ -5,10 +5,10 @@ query.navigatable = []
 
 // TODO: figure out a way to support SSR
 if (typeof window !== 'undefined') {
-  
-  const initial = {}
+  let initial = {}
   let duringPopState = false
-  const setStoreFromURL = () => {
+  const handlePop = () => {
+    
     const params = new URLSearchParams(window.location.search)
     for (const [param, value] of params) {
       try {
@@ -18,17 +18,16 @@ if (typeof window !== 'undefined') {
       initial[param] = value
     }
     duringPopState = true
-    query.set(initial) 
+    query.set(initial)
     duringPopState = false
   }
 
-  setStoreFromURL()
-  window.addEventListener('popstate', setStoreFromURL)
+  handlePop()
+  window.addEventListener('popstate', handlePop)
 
   let oldParams = initial
   query.subscribe(params => {
     if (duringPopState) return
-    if (typeof history == 'undefined') return
     let search = ''
     let pushHistory = false
     for (const param in params) {
@@ -44,10 +43,10 @@ if (typeof window !== 'undefined') {
     }
     oldParams = JSON.parse(JSON.stringify(params))
     if (pushHistory) {
-      history.pushState(null, document.title, window.location.pathname + search)
+      history.pushState(history.state, document.title, window.location.pathname + search)
     }
     else {
-      history.replaceState(null, document.title, window.location.pathname + search)
+      history.replaceState(history.state, document.title, window.location.pathname + search)
     }
   })
 }
