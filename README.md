@@ -16,9 +16,9 @@ import query from 'query-store'
 
 And that's all there is to it.
 
-### Sapper
+### Sapper / SSR
 
-To make this work with Sapper, manually initialize the store like this:
+To make this work with Sapper, manually initialize the store server-side like this:
 
 ```html
 <script context="module">
@@ -30,4 +30,17 @@ export function preload(page) {
 </script>
 
 <input bind:value={$query.param}>
+```
+
+### History Navigation
+
+To create a history entry on each query change (using pushState instead of replaceState), add the param name that you want to track to the `navigatable` array.
+
+```html
+<script>
+import query from 'query-store'
+query.navigatable.push('tab')
+</script>
+
+<a class="tab" on:click={() => $query.tab = 'home'}>
 ```
