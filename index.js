@@ -44,10 +44,10 @@ if (typeof window !== 'undefined') {
     }
     oldParams = JSON.parse(JSON.stringify(params))
     if (pushHistory) {
-      history.pushState(null, null, window.location.pathname + search)
+      history.pushState(null, document.title, window.location.pathname + search)
     }
     else {
-      history.replaceState(null, null, window.location.pathname + search)
+      history.replaceState(null, document.title, window.location.pathname + search)
     }
   })
 }
