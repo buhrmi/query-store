@@ -16,32 +16,39 @@ import query from 'query-store'
 
 And that's all there is to it.
 
-### Sapper / SSR
-
-To make this work with Sapper, manually initialize the store server-side like this:
-
-```html
-<script context="module">
-import query from 'query-store'
-
-export function preload(page) {
-  query.set(page.query)
-}
-</script>
-
-<input bind:value={$query.param}>
-```
 
 ### History Navigation
 
-To create a history entry on each query change (using pushState instead of replaceState), add the param name that you want to track to the `navigatable` array.
+To create a history entry on each query change (using pushState instead of replaceState), call `keepHistory` with the name of the param.
 
 ```html
 <script>
 import query from 'query-store'
-query.navigatable.push('seed')
+query.keepHistory('seed')
 </script>
 
 Current seed is {$query.seed}
 <button on:click={() => $query.seed = Math.random()}>Generate new seed</button>
 ```
+
+### Integrate with routers
+
+If you use a router that has its own handling of query parameters (eg Sapper's `$page.query`), you can sync them up like this:
+
+```html
+<script>
+import query from 'query-store'
+import { stores } from '@sapper/app'
+
+const { page } = stores()
+$: query.setWithoutHistory($page.query)
+</script>
+
+Current tab is {$query.tab}
+
+<a href="{$page.path}?tab=general">Home</a>
+<a href="{$page.path}?tab=details">Details</a>
+<a href="{$page.path}?tab=edit">Edit</a>
+```
+
+Even though Sapper's $page store is read-only, this way you can directly assign values to the $query store.
