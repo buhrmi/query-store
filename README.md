@@ -16,9 +16,7 @@ import query from 'query-store'
 
 And that's all there is to it.
 
-### SSR
-
-#### Sapper
+### Sapper
 
 To make this work with Sapper, manually initialize the store like this:
 
@@ -33,7 +31,3 @@ export function preload(page) {
 
 <input bind:value={$query.param}>
 ```
-
-## Todo
-
- - [ ] Check 
