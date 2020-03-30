@@ -33,7 +33,7 @@ Current seed is {$query.seed}
 
 ### Integrate with routers
 
-If you use a router that has its own handling of query parameters (eg Sapper's `$page.query`), you can sync them up like this:
+If you use a router that has its own navigation handling (eg Sapper), you can sync the router's query params to the query store like this:
 
 ```html
 <script>
@@ -50,5 +50,3 @@ Current tab is {$query.tab}
 <a href="{$page.path}?tab=details">Details</a>
 <a href="{$page.path}?tab=edit">Edit</a>
 ```
-
-Even though Sapper's $page store is read-only, this way you can directly assign values to the $query store.
