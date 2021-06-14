@@ -20,7 +20,7 @@ if (typeof window !== 'undefined') {
   const handlePop = () => {
     
     const params = new URLSearchParams(window.location.search)
-    for (const [param, value] of params) {
+    for (let [param, value] of params) {
       try {
         value = JSON.parse(value)
       }
