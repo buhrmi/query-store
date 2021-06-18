@@ -1,6 +1,6 @@
 # query-store
 
-query-store gives you a writable svelte store that syncs with the browser's search params. Makes for easy bookmarking and sharing of UI state.
+query-store gives you a writable svelte store that syncs with the URL's search params. Makes for easy bookmarking and sharing of UI state.
 
 ## Usage
 
